@@ -45,18 +45,27 @@ addOperation(value){
 
     if(isNaN(this.getLastOperation())){
         if(this.isOperator(value)){
-            this._setLastOperation(value);
+            this.setLastOperation(value);
         }else if(isNaN(value)){
             console.log(value);
         }else{
             this._operation.push(value);
         }
     }else{
-        let newValue = this.getLastOperation().toString() + value.toString();
-        this.setLastOperation(parseInt(newValue));
+
+        if(this.isOperator(value)){
+            this._operation.push(value);
+        }else{
+            let newValue = this.getLastOperation().toString() + value.toString();
+            this.setLastOperation(parseInt(newValue));
+        
+            console.log(newValue)
+        }
+
+       
     }
 
-            console.log(this._operation)
+            
 }
 
 setError(){
