@@ -9,24 +9,23 @@ class CalcController {
         this.initButtonsEvents();
     }
 
-    initialize(){
-     
-        this._displayCalcEl.innerHTML = "007";
-        //dateEl.innerHTML = "01/09/1987";
-        //timeEl.innerHTML = "00:07";
-    }
+initialize(){
+    
+    this._displayCalcEl.innerHTML = "007";
+    //dateEl.innerHTML = "01/09/1987";
+    //timeEl.innerHTML = "00:07";
+}
 /*
-    addEventListenerAll(element, events, fn){
-        events.split(' ').forEach(event =>{
-        element.addEventListener(event, fn, false)           
-        })
-    }
+addEventListenerAll(element, events, fn){
+    events.split(' ').forEach(event =>{
+    element.addEventListener(event, fn, false)           
+    })
+}
 */
 
 clearAll(){
     this._operation = [];
 }
-
 clearEntry(){
     this._operation.pop();
 }
@@ -36,11 +35,9 @@ getLastOperation(value){
 isOperator(value){
     if(['+', '-', '*', '%', '/'].indexOf(value) > -1);
 }
-
 setLastOperation(value){
     this._operation[this._operation.length - 1] = value; 
 }
-
 addOperation(value){
 
     if(isNaN(this.getLastOperation())){
@@ -57,8 +54,7 @@ addOperation(value){
             this._operation.push(value);
         }else{
             let newValue = this.getLastOperation().toString() + value.toString();
-            this.setLastOperation(parseInt(newValue));
-        
+            this.setLastOperation(parseInt(newValue));        
             console.log(newValue)
         }
 
@@ -67,11 +63,9 @@ addOperation(value){
 
             
 }
-
 setError(){
     this.displayCalc = "ERROR";
 }
-
 execBtn(value){
     switch (value){
         case 'ac':
@@ -98,12 +92,9 @@ execBtn(value){
         case 'igual':
             this.addOperation('=');
             break;
-
         case 'ponto':
-            this.addOperation('.');
-            
+            this.addOperation('.');            
             break;
-
         case '0':
         case '1':
         case '2':
@@ -116,40 +107,33 @@ execBtn(value){
         case '9':
             this.addOperation(parseInt(value));
             break;
-
         default:
             this.setError();
             break;
     }
 };
+initButtonsEvents(){
+    let buttons = document.querySelectorAll("#buttons > g, #parts > g")
 
-
-    initButtonsEvents(){
-     let buttons = document.querySelectorAll("#buttons > g, #parts > g")
-
-     buttons.forEach((btn, index)=>{
-        btn.addEventListener('click', e=>{
-            
-            let textBtn =btn.className.baseVal.replace("btn-", "");
-            this.execBtn(textBtn)
+    buttons.forEach((btn, index)=>{
+    btn.addEventListener('click', e=>{        
+        let textBtn =btn.className.baseVal.replace("btn-", "");
+        this.execBtn(textBtn)
         })
-     })
+    })
 
-    }
-
+}
     get displayCalc(){
         return this._displayCalcEl.innerHTML;
     }
-
     set displayCalc(valor){
         this._displayCalcEl.innerHTML = valor;
     }
-
     get currentDate(){
         return new Date();
     }
-
     set currentDate(valor){
         this._currentDate = valor;
     }
+
 }
